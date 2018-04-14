@@ -1,0 +1,7 @@
+Við setjum fyrst þrjá lykla á hvora vogarskál. Ef vogin er í jafnvægi vitum við að létti lykillinn er annar af þeim
+tveimur sem eftir eru og þarf því aðeins að setja þá sína í hvora vogarskál til að
+finna létta lykilinn. Ef hins vegar vogin er ekki í jafnvgi er létti lykillinn einn af
+þeim þremur sem er í skálinni sem stígur upp. Við tökum tvo af þessum
+þremur og setjum sína í hvora vogarskál og ef vogin er ekki í jafnvægi er létti
+lykillinn í skálinni sem stígur upp en ef vogin er í jafnvægi er létti lykillinn þriðji
+lykillinn.
