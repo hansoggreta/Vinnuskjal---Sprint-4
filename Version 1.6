@@ -1,0 +1,437 @@
+import os
+import sys
+import turtle
+
+from turtle import Turtle, Screen
+
+import time
+
+
+class HansogGretaSp2(object):
+     def getName(self): pass
+     def getDescription(self): pass
+     def Visbending(self): pass
+     def Tapalifi(self): pass
+     def StartingProblem(self): pass
+     def problem1(self): pass
+     def problem2(self): pass
+     def problem3(self): pass
+     def problem4(self): pass
+
+class Lif(HansogGretaSp2):
+    def __init__(self, herb, hjalp):
+        self.herb = herb
+        self.hjalp = hjalp
+
+
+        if self.hjalp == True:
+            self.Visbending()
+
+
+
+    def Visbending(self):
+        #Birtir visbendingu sé þess óskað
+        if self.herb == 1:
+            with open('visbending1.txt',encoding = "utf-8") as spurning:
+                data = spurning.read()
+                print(data)
+        if self.herb == 2:
+            with open('visbending2.txt',encoding = "utf-8") as spurning:
+                data = spurning.read()
+                print(data)
+        if self.herb == 3:
+            with open('visbending3.txt',encoding = "utf-8") as spurning:
+                data = spurning.read()
+                print(data)
+        if self.herb == 4:
+            with open('visbending4.txt',encoding = "utf-8") as spurning:
+                data = spurning.read()
+                print(data)
+
+class Herbergi(HansogGretaSp2):
+    def __init__(self, name, herb, lif):
+        self.name= name
+        self.herb= herb
+        self.lif = lif
+        self.StartingProblem()
+
+    def StartingProblem(self): #Method sem býr til þraut, g.r.f. að hluturinn self.herb haldist hér úr smið, t.d. ef self.herb == 1 þá helst það hér
+        description= self.getDescription()
+        print(description)
+        if self.herb == 1:
+            self.problem1()
+        elif self.herb == 2:
+            self.problem2()
+        elif self.herb == 3:
+            self.problem3()
+        elif self.herb == 4:
+            self.problem4()
+
+    def problem1(self):
+        self.tilraunir = 4
+        time.sleep(2.5)
+        print('-------')
+        print('ÞRAUT 1')
+        print('-------')
+        time.sleep(1)
+        print('Fjoldi lifa: ',self.lif)
+        time.sleep(1)
+        print('Búðu til fjögur fjögurra stafa orð úr stöfunum í orðinu piparkaka.')
+        time.sleep(1)
+        print('Þú færð 4 tilraunir. Ef þú vilt fá vísbendingu skaltu skrifa "hjalp"')
+        time.sleep(1.5)
+        o = ['kaka', 'prik', 'rapp', 'apar']
+        fundin = []
+        NotaVisbendingu = False
+        self.skipti = 0
+        while self.tilraunir > 0:
+            print('PIPARKAKA')
+            s1 = input('Orðið mitt:')
+            self.skipti += 1
+            hjalp = 'hjalp'
+            if s1 == hjalp and NotaVisbendingu == False:
+                if self. tilraunir <= 1:
+                    with open('NeitaVísbendingu.txt',encoding = "utf - 8") as spurning:
+                        data = spurning.read()
+                        print(data)
+                else:
+                    print('Þú missir eina tilraun ef þú vilt sjá vísbendinguna')
+                    svar = input('Ertu viss um að þú viljir halda áfram? (j/n):')
+                    if svar == 'j':
+                        hjalp = True
+                        NotaVisbendingu = True
+                        self.herb=1
+                        Lif(self.herb, NotaVisbendingu)
+                        self.tilraunir = self.tilraunir - 1
+
+            elif s1 == hjalp and NotaVisbendingu == True:
+                print('Þú ert búinn að fá að sjá vísbendinguna')
+                time.sleep(1)
+            else:
+                s1 = str(s1)
+                s1 = s1.lower()
+                if s1 in fundin:
+                    print('Þú hefur þegar fundið þetta orð. Reyndu aftur')
+                    time.sleep(1)
+                elif s1 in o:
+                    print('Rétt hjá þér!')
+                    time.sleep(1)
+                    fundin.append(s1)
+                    del o[o.index(s1)]
+                    if len(o) != 0:
+                        print('Giskaðu á næsta orð.')
+                        time.sleep(1)
+                    else:
+                        print('Þú hefur fundið öll orðin!')
+                        time.sleep(1)
+                        return
+                else:
+                    self.tilraunir -= 1
+                    if self.tilraunir != 0:
+                        print('Rangt svar. Reyndu aftur! Tilraunir eftir:'  + repr(self.tilraunir))
+                        time.sleep(1)
+                    else:
+                        print('Þú ert búin/n með allar tilraunirnar þínar og missir eitt líf.')
+                        time.sleep(1)
+                        self.lif = self.lif-1
+                        print('Fjoldi lifa: ',self.lif)
+                        time.sleep(1)
+                        if self.lif == 0:
+                            print('Fjoldi lifa: ',self.lif)
+                            time.sleep(1)
+                            return self.lif
+                        else:
+                            self.tilraunir = 4
+        return self.lif
+
+    def problem2(self):
+        time.sleep(2.5)
+        tilraun = 3
+        print('-------')
+        print('ÞRAUT 2')
+        print('-------')
+        time.sleep(1)
+
+        with open('thraut2.txt',encoding = "utf-8") as spurning:
+            data = spurning.read()
+        print(data)
+        self.s1 = 0
+        hjalp = "hjalp"
+        NotaVisbendingu = False
+        while(self.s1 != 2 and tilraun > 0):
+            self.s1 = input('Fjöldi umferða:')
+            if self.s1 == hjalp and NotaVisbendingu == False:
+                print('Þú missir eina tilraun ef þú vilt sjá vísbendinguna')
+                svar = input('Ertu viss um að þú viljir halda áfram? (j/n):')
+                if svar == 'j':
+                    NotaVisbendingu = True
+                    Lif(self.herb, NotaVisbendingu)
+                    tilraun = tilraun - 1
+
+            elif self.s1 == hjalp and NotaVisbendingu == True:
+                print('Þú ert búinn að fá vísbendinguna.')
+
+            elif self.s1.isdigit() == True:
+                self.s1 = int(self.s1)
+                tilraun = tilraun - 1
+
+                if tilraun > 0 and self.s1 != 2:
+                    print('Rangt svar. Þú mátt reyna aftur. Þú átt eftir ' + repr(tilraun) + ' tilraunir')
+
+                elif tilraun == 0 and self.s1 != 2:
+                    print('Rangt svar. Þú ert búinn með allar tilraunirnar þínar. Þú ert búinn að missa eitt líf')
+                    tilraun = 3
+                    self.lif = self.lif-1
+                    if self.lif == 0:
+                        return self.lif
+            else:
+                print('Þú verður að setja inn tölustaf. Ef þú vilt fá vísbendingu skaltu skrifa "hjalp"')
+
+        print('Rétt hjá þér! Áfram í næsta herbergi.')
+        with open('lausn2.txt',encoding = "utf-8") as lausn:
+            data = lausn.read()
+        print(data)
+        return self.lif
+
+    def problem3(self):
+        time.sleep(2.5)
+        tilraun = 5
+        print('-------')
+        print('ÞRAUT 3')
+        print('-------')
+        time.sleep(1)
+        print('Fjoldi lifa: ',self.lif)
+        time.sleep(1)
+        with open('thraut3.txt', encoding = 'utf-8') as spurning:
+            data = spurning.read()
+        print(data)
+
+        print('Ýttu á einhvern takk á lyklaborðinu og þá mun birtast mynd af glugganum í kofanum.')
+
+        a = 0
+        while (a != 1 and tilraunir > 0):
+            a = input()
+            print('Þú verður að ýta á einhvern takka til að glugginn birtist')
+            time.sleep(1)
+            break
+
+        screen = turtle.Screen()
+        screen.setup(600,600)
+        screen.bgpic("gluggi.gif")
+        screen.update()
+
+        self.s1 = 0
+        hjalp = "hjalp"
+        NotaVisbendingu = False
+        while(self.s1 != 30 and tilraunir > 0):
+            self.s1 = input('Fjöldi ferninga:')
+            if self.s1 == hjalp and NotaVisbendingu == False:
+                print('Þú missir eina tilraun ef þú vilt sjá vísbendinguna')
+                svar = input('Ertu viss um að þú viljir halda áfram? (j/n):')
+                if svar == 'j':
+                    NotaVisbendingu = True
+                    Lif(self.herb, NotaVisbendingu)
+                    tilraunir = tilraunir - 1
+
+            elif self.s1 == hjalp and NotaVisbendingu == True:
+                print('Þú ert búinn að fá vísbendinguna.')
+                time.sleep(1)
+
+            elif self.s1.isdigit() == True:
+                self.s1 = int(self.s1)
+                tilraunir = tilraunir - 1
+
+                if tilraunir > 0 and self.s1 != 30:
+                    print('Rangt svar. Þú mátt reyna aftur. Þú átt eftir ' + repr(tilraunir) + ' tilraunir')
+                    time.sleep(1)
+
+                elif tilraunir == 0 and self.s1 != 30:
+                    print('Rangt svar. Þú ert búinn með allar tilraunirnar þínar. Þú ert búinn að missa eitt líf')
+                    time.sleep(1)
+                    tilraunir = 3
+                    self.lif = self.lif-1
+                    if self.lif == 0:
+                        return self.lif
+            else:
+                print('Þú verður að setja inn tölustaf. Ef þú vilt fá vísbendingu skaltu skrifa "hjalp"')
+                time.sleep(1)
+
+
+        print('Rétt hjá þér! Áfram í næsta herbergi.')
+        time.sleep(1)
+        return self.lif
+
+    def problem4(self):
+        time.sleep(2.5)
+        tilraunir = 5
+        print('-------')
+        print('ÞRAUT 4')
+        print('-------')
+        time.sleep(1)
+        print('Fjoldi lifa: ',self.lif)
+        time.sleep(1)
+        with open('thraut4.txt', encoding = 'utf-8') as spurning:
+            data = spurning.read()
+        print(data)
+
+        print('Ýttu á einhvern takk á lyklaborðinu og þá mun birtast mynd af eldúsinu þar sem Hans er fastur.')
+
+        a = 0
+        while (a != 1 and tilraunir > 0):
+            a = input()
+            print('Þú verður að ýta á einhvern takka til að glugginn birtist')
+            time.sleep(1)
+            break
+
+        screen = turtle.Screen()
+        screen.setup(1000,700)
+        screen.bgpic("hansoggreta.gif")
+        screen.update()
+
+        self.s1 = 0
+        hjalp = "hjalp"
+        NotaVisbendingu = False
+        while(self.s1 != 12 and tilraunir > 0):
+            self.s1 = input('Fjöldi andlita:')
+            if self.s1 == hjalp and NotaVisbendingu == False:
+                print('Þú missir eina tilraun ef þú vilt sjá vísbendinguna')
+                svar = input('Ertu viss um að þú viljir halda áfram? (j/n):')
+                if svar == 'j':
+                    NotaVisbendingu = True
+                    Lif(self.herb, NotaVisbendingu)
+                    tilraunir = tilraunir - 1
+
+            elif self.s1 == hjalp and NotaVisbendingu == True:
+                print('Þú ert búinn að fá vísbendinguna.')
+                time.sleep(1)
+
+            elif self.s1.isdigit() == True:
+                self.s1 = int(self.s1)
+                tilraunir = tilraunir - 1
+
+                if tilraunir > 0 and self.s1 != 12:
+                    print('Rangt svar. Þú mátt reyna aftur. Þú átt eftir ' + repr(tilraunir) + ' tilraunir')
+                    time.sleep(1)
+
+                elif tilraunir == 0 and self.s1 != 12:
+                    print('Rangt svar. Þú ert búinn með allar tilraunirnar þínar. Þú ert búinn að missa eitt líf')
+                    time.sleep(1)
+                    tilraunir = 3
+                    self.lif = self.lif-1
+                    if self.lif == 0:
+                        return self.lif
+            else:
+                print('Þú verður að setja inn tölustaf. Ef þú vilt fá vísbendingu skaltu skrifa "hjalp"')
+                time.sleep(1)
+
+
+        print('Rétt hjá þér! Þú hefur náð að bjarga Hans úr klóm vondu nornarinnar. Til hamingju!')
+        time.sleep(1)
+        return self.lif
+
+    def getName(self):
+        return self.name
+
+    def getDescription(self):
+        print('Þú ert komin/n í herbergið:', self.name, '. Gangi þér vel að leysa þrautina.')
+        if self.herb == 1:
+            return 'Lýsing: Herbergið þar sem vonda nornin horfir á sjónvarpið.'
+        elif self.herb == 2:
+            return 'Lýsing: Herbergið þar sem vonda nornin sefur.'
+        elif self.herb == 3:
+            return 'Lýsing: Herbergið þar sem vonda nornin tannburstar sig.'
+        elif self.herb == 4:
+            print('Vonandi nær nornin ekki að elda Hans!')
+            return 'Lýsing: Herbergið þar sem vonda nornin vill elda Hans.'
+
+class Persona(Herbergi):
+    def __init__(self, kyn, name, description):
+        self.name= name
+        self.description= description
+        self.kyn= kyn
+
+    def getName(self):
+        return self.name
+
+    def getDescription(self):
+        return self.description
+    def kyn(self):
+        if self.kyn == 1:
+            return 'Kvenkyns'
+        else:
+            return 'Karlkyns'
+
+def main():
+    win = 'Lifandi' #Verður true þegar allar þrautirnar i leiknum hafa verið leystar
+    lif = 5
+    with open('upphaf.txt',encoding = "utf-8") as texti:
+        data = texti.read()
+    print(data)
+    VeljaPersonu = False
+    while(VeljaPersonu == False):
+        print("Hvort viltu leika Hans eða Grétu? Skrifaðu 1 fyrir Grétu eða 2 fyrir Hans.")
+        val = input('Mitt val:' )
+        if val.isdigit() == True:
+            val = int(val)
+            if val == 1:
+                print("Þú hefur valið Grétu.")
+                time.sleep(1)
+                s = Persona(1, 'Gréta', 'Lítil stelpa með ljóst hár')
+                VeljaPersonu = True
+            elif val == 2:
+                print("Þú hefur valið Hans.")
+                time.sleep(1)
+                name = 'Hans'
+                s = Persona(0, 'Hans', 'Lítill strákur með dökkt hár')
+                VeljaPersonu = True
+            else:
+                print("Þú þarft að skrifa 1 fyrir Grétu eða 2 fyrir Hans.")
+                time.sleep(1)
+        else:
+            print('Þú verður að skrifa tölustaf')
+            time.sleep(1)
+
+
+    while(win == 'Lifandi'):
+
+        herb = 1
+        h1 = Herbergi('Stofa', herb, lif)
+        lif = h1.lif
+        if lif == 0:
+            win = "Loser"
+            break
+        #input nýtt herbergi
+        herb=2
+        h2=Herbergi('Svefnherbergi', herb, lif)
+        lif = h2.lif
+        if lif == 0:
+            win = "Loser"
+            break
+
+        herb=3
+        h3 =Herbergi('Baðherbergi', herb, lif)
+        lif = h3.lif
+        if lif == 0:
+            win = "Loser"
+            break
+
+        herb=4
+        h4=Herbergi('Eldhús', herb, lif)
+        lif = h4.lif
+        if lif == 0:
+            win = "Loser"
+            break
+        else:
+            win = 'Winner'
+            break
+
+    if win == 'Winner':
+        print('-----------------------')
+        print('Þú hefur unnið leikinn!')
+        print('-----------------------')
+    elif win == "Loser":
+        print('-----------------------')
+        print('Þú tapaðir leiknum!')
+        print('-----------------------')
+if __name__ == "__main__":
+    main()
